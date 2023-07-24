@@ -21,7 +21,7 @@ function ScatterPlot(props) {
         view.signal('yAxis',props.yscale);
         view.signal("width",props.size.width);
         view.signal('height',120);
-        view.signal("minX",props.extremeValues[0]);
+        view.signal("minX",props.extremeValues[0]);  /* "ExtremeValues" store scale of the chart */
         view.signal("maxX",props.extremeValues[1]);
         view.signal("minY",props.extremeValues[2]);
         view.signal("maxY",props.extremeValues[3]);

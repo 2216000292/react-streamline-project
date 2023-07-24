@@ -1,6 +1,5 @@
 import React from 'react'
 import threeD_Picture from './picture/threeD.jpg';
-import control_panel from './picture/control_panel.jpg';
 function ThreeD() {
 
   return (

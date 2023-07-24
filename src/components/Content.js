@@ -13,7 +13,9 @@ function Content(props) {
   const { contentRef } = props;
   // const inputData = props.inputData;
   const [inputData, setInputData] = useState(JSON.parse(JSON.stringify(props.inputData)))
-  const chartType = props.chartType;
+  //The expected inputData should be an array composed of [index, regular data array , derivative data array, _ ].
+
+
   const showDerivative = props.showDerivative
   const xscale = "x";
   const yscale = "y";
@@ -40,9 +42,8 @@ function Content(props) {
     resizeObserver.observe(contentRef.current);
 
     let extremeValues;
-    if (!showDerivative) {
-      extremeValues = findMinMax(inputData,false)
-      console.log("**********",extremeValues);
+    if (!showDerivative) {   //If the user didn't checked the checkbox (render regualr data)
+      extremeValues = findMinMax(inputData,false)  //Calculate the scale (the second parameter determines whether to use derivative data as input or not).
       setRenderedChart(
         <>
           {inputData.map((dataItem, index) => (
@@ -54,8 +55,8 @@ function Content(props) {
           <ScatterPlot_overview inputData={calculateAverage(inputData,false)} xscale={xscale} yscale={yscale} size={size} extremeValues={extremeValues}></ScatterPlot_overview>
         </>
       );
-    }else{
-      extremeValues = findMinMax(inputData,true)
+    }else{ //If the user checked the checkbox (render derivative data)
+      extremeValues = findMinMax(inputData,true)  //Calculate the scale (the second parameter determines whether to use derivative data as input or not).
       setRenderedChart(
         <>
           {inputData.map((dataItem, index) => (
