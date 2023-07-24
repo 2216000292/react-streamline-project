@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/react-streamline-project/static/css/main.ba4ee342.css",
+    "main.js": "/react-streamline-project/static/js/main.eb0e21b9.js",
+    "static/js/787.fe206247.chunk.js": "/react-streamline-project/static/js/787.fe206247.chunk.js",
+    "static/media/control_panel.jpg": "/react-streamline-project/static/media/control_panel.f189490279db035efcfd.jpg",
+    "static/media/threeD.jpg": "/react-streamline-project/static/media/threeD.d7836971d51df0300a4b.jpg",
+    "index.html": "/react-streamline-project/index.html",
+    "main.ba4ee342.css.map": "/react-streamline-project/static/css/main.ba4ee342.css.map",
+    "main.eb0e21b9.js.map": "/react-streamline-project/static/js/main.eb0e21b9.js.map",
+    "787.fe206247.chunk.js.map": "/react-streamline-project/static/js/787.fe206247.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba4ee342.css",
+    "static/js/main.eb0e21b9.js"
+  ]
+}
