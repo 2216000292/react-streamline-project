@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-streamline-project/static/css/main.ba4ee342.css",
-    "main.js": "/react-streamline-project/static/js/main.970f1535.js",
+    "main.css": "/react-streamline-project/static/css/main.d09675ce.css",
+    "main.js": "/react-streamline-project/static/js/main.45c8fae7.js",
     "static/js/787.fe206247.chunk.js": "/react-streamline-project/static/js/787.fe206247.chunk.js",
     "static/media/threeD.jpg": "/react-streamline-project/static/media/threeD.d7836971d51df0300a4b.jpg",
     "index.html": "/react-streamline-project/index.html",
-    "main.ba4ee342.css.map": "/react-streamline-project/static/css/main.ba4ee342.css.map",
-    "main.970f1535.js.map": "/react-streamline-project/static/js/main.970f1535.js.map",
+    "main.d09675ce.css.map": "/react-streamline-project/static/css/main.d09675ce.css.map",
+    "main.45c8fae7.js.map": "/react-streamline-project/static/js/main.45c8fae7.js.map",
     "787.fe206247.chunk.js.map": "/react-streamline-project/static/js/787.fe206247.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba4ee342.css",
-    "static/js/main.970f1535.js"
+    "static/css/main.d09675ce.css",
+    "static/js/main.45c8fae7.js"
   ]
 }
