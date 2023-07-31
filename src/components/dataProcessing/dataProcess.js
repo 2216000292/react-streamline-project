@@ -44,31 +44,77 @@ export function findMinimums(data) {
  It creates a new object where the keys are the unique 'c' values and the values are arrays of elements that 
  have the same 'c' value. The result is then sorted based on the smallest 'x' value and the length of the arrays.
 */
+// export function classifyData(data) {
+//   let result = {};
+
+//   for(let i = 0; i < data.length; i++) {
+//       let cValue = data[i].c;
+//       if(!result[cValue]) {
+//           result[cValue] = [];
+//       }
+//       result[cValue].push(data[i]);
+//   }
+
+//   let keys = Object.keys(result);
+//   keys.sort((a, b) => {
+//       let minXa = Math.min(...result[a].map(item => item.x));
+//       let minXb = Math.min(...result[b].map(item => item.x));
+
+//       if (minXa !== minXb) return minXa - minXb;
+
+//       return result[a].length - result[b].length;
+//   });
+
+//   let sortedResult = keys.map(key => [key, result[key]]);
+
+//   return sortedResult;
+// }
 export function classifyData(data) {
   let result = {};
 
+  // Classify data
   for(let i = 0; i < data.length; i++) {
-      let cValue = data[i].c;
-      if(!result[cValue]) {
-          result[cValue] = [];
-      }
-      result[cValue].push(data[i]);
+    let cValue = data[i].c;
+    if(!result[cValue]) {
+      result[cValue] = [];
+    }
+    result[cValue].push(data[i]);
   }
 
+  // Calculate average y and add to each item
+  for(let cValue in result) {
+    // Calculate average
+    let sum = 0;
+    let count = result[cValue].length;
+    for(let item of result[cValue]) {
+      sum += item.y;
+    }
+    let avg = sum / count; 
+
+    // Add avg to each item
+    for(let item of result[cValue]) {
+      item.avg = avg;
+    }
+  }
+
+  // Sort the keys
   let keys = Object.keys(result);
   keys.sort((a, b) => {
-      let minXa = Math.min(...result[a].map(item => item.x));
-      let minXb = Math.min(...result[b].map(item => item.x));
+    let minXa = Math.min(...result[a].map(item => item.x));
+    let minXb = Math.min(...result[b].map(item => item.x));
 
-      if (minXa !== minXb) return minXa - minXb;
+    if (minXa !== minXb) return minXa - minXb;
 
-      return result[a].length - result[b].length;
+    return result[a].length - result[b].length;
   });
 
   let sortedResult = keys.map(key => [key, result[key]]);
 
+  // console.log("当前测试",sortedResult);
   return sortedResult;
 }
+
+
 
 /*
 This function calculates the derivative (slope) of the input data. 
@@ -86,7 +132,8 @@ export function calculateDerivatives(data) {
     return {
       x: val.x,
       y: slope,
-      c: val.c
+      c: val.c,
+      avg: val.avg
     };
   }).filter(item => item !== null);  // remove null values from array
   
@@ -103,6 +150,7 @@ export function transformArray(originalArray) {
     newArray.push([index, item[1], derivatives, show]);
   }
 
+  // console.log("当前测试2",newArray);
   return newArray;
 }
   

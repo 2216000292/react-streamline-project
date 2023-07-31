@@ -17,6 +17,7 @@ function Content(props) {
 
 
   const showDerivative = props.showDerivative
+  const showGradient = props.showGradient
   const xscale = "x";
   const yscale = "y";
 
@@ -46,32 +47,37 @@ function Content(props) {
       extremeValues = findMinMax(inputData,false)  //Calculate the scale (the second parameter determines whether to use derivative data as input or not).
       setRenderedChart(
         <>
+          <ScatterPlot_overview inputData={calculateAverage(inputData,false)} xscale={xscale} yscale={yscale} size={size} extremeValues={extremeValues} showGradient={showGradient}></ScatterPlot_overview>
+          <div className='scrollable-div'>
           {inputData.map((dataItem, index) => (
           <div className="chart-container" key={dataItem[0]}>
-            <ScatterPlot inputData={dataItem[1]} xscale={xscale} yscale={yscale} size={size} extremeValues={extremeValues}/>
+            <ScatterPlot inputData={dataItem[1]} xscale={xscale} yscale={yscale} size={{...size, width: size.width - 30}} extremeValues={extremeValues}/>
             <CheckBox id={dataItem[0]} onCheck={handleCheckBoxChange} />
           </div>
           ))}
-          <ScatterPlot_overview inputData={calculateAverage(inputData,false)} xscale={xscale} yscale={yscale} size={size} extremeValues={extremeValues}></ScatterPlot_overview>
+          </div>
+          
         </>
       );
     }else{ //If the user checked the checkbox (render derivative data)
       extremeValues = findMinMax(inputData,true)  //Calculate the scale (the second parameter determines whether to use derivative data as input or not).
       setRenderedChart(
         <>
+          <ScatterPlot_overview inputData={calculateAverage(inputData,true)} xscale={xscale} yscale={yscale} size={size} extremeValues={extremeValues} showGradient={showGradient}></ScatterPlot_overview>
+          <div className='scrollable-div'>
           {inputData.map((dataItem, index) => (
           <div className="chart-container" key={dataItem[0]}>
-            <ScatterPlot inputData={dataItem[2]} xscale={xscale} yscale={yscale} size={size} extremeValues={extremeValues}/>
+            <ScatterPlot inputData={dataItem[2]} xscale={xscale} yscale={yscale} size={{...size, width: size.width - 30}} extremeValues={extremeValues}/>
             <CheckBox id={dataItem[0]}  onCheck={handleCheckBoxChange} />
           </div>
           ))}
-          <ScatterPlot_overview inputData={calculateAverage(inputData,true)} xscale={xscale} yscale={yscale} size={size} extremeValues={extremeValues}></ScatterPlot_overview>
+          </div>
         </>
       );
     }
   
     return () => resizeObserver.disconnect();
-  }, [size.width, size.height, inputData, xscale, yscale, showDerivative]);
+  }, [size.width, size.height, inputData, xscale, yscale, showDerivative,showGradient]);
   
 
 
