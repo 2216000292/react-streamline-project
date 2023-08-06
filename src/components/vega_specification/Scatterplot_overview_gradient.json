@@ -35,12 +35,12 @@
       {
         "name": "data_1",
         "source": "Data",
-        "transform": [{"type": "filter", "expr": "datum.c == 0"}]
+        "transform": [{"type": "filter", "expr": "datum.c == -100"}]
       },
       {
         "name": "chartData",
         "source": "Data",
-        "transform": [{"type": "filter", "expr": "datum.c > 0"}]
+        "transform": [{"type": "filter", "expr": "datum.c > -100"}]
       },   
       {
         "name": "trend",
@@ -101,7 +101,29 @@
       {
       "name": "interpolate",
       "value": "cardinal"
-      }
+      },
+      {
+        "name": "tooltip",
+        "value": {},
+        "on": [
+           {"events": "mouseover", "update": "datum ? datum : {}"},
+           {"events": "mouseout", "update": "{}"}
+        ]
+        },
+        {
+          "name": "highlight",
+          "value": {},
+          "on": [
+            {"events": "click", "update": "datum && datum.c != -100? datum : {}"}
+          ]
+        },
+        {
+          "name": "colorID",
+          "value": {},
+          "on": [
+             {"events": "symbol:click", "update": "item()? item() : {}"}
+          ]
+          }
     ],
 
     "marks": [
@@ -171,8 +193,14 @@
                   "update": {
                     "stroke": {"scale": "color", "field": {"signal": "classification"}},
                     "x": {"scale": "xDetail", "field": {"signal": "xAxis"}},
-                    "y": {"scale": "yDetail", "field": {"signal": "yAxis"}}
-                  }
+                    "y": {"scale": "yDetail", "field": {"signal": "yAxis"}},
+                    "strokeWidth": {"signal": "datum.c == highlight.c || datum.c == tooltip.c ? '5' : '2'"}
+                  },
+                  "hover": {
+                    "tooltip": {
+                      "signal": "{'Streamline Index': datum.c}"
+                    }
+                    }
                 }
               },
               {

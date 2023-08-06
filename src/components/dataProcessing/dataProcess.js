@@ -69,6 +69,126 @@ export function findMinimums(data) {
 
 //   return sortedResult;
 // }
+// export function classifyData(data) {
+//   let result = {};
+
+//   // Classify data
+//   for(let i = 0; i < data.length; i++) {
+//     let cValue = data[i].c;
+//     if(!result[cValue]) {
+//       result[cValue] = [];
+//     }
+//     result[cValue].push(data[i]);
+//   }
+
+//   function hslToHex(h, s, l) {
+//     l /= 100;
+//     const a = s * Math.min(l, 1 - l) / 100;
+//     const f = n => {
+//       const k = (n + h / 30) % 12;
+//       const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+//       return Math.round(255 * color).toString(16).padStart(2, '0'); // Convert to Hex and pad with 0 if needed
+//     };
+//     return `#${f(0)}${f(8)}${f(4)}`;
+//   }
+
+//   // Calculate average y and add to each item
+//   for(let cValue in result) {
+//     // Calculate average
+//     let sum = 0;
+//     let count = result[cValue].length;
+//     for(let item of result[cValue]) {
+//       sum += item.y;
+//     }
+//     let avg = sum / count; 
+
+//     // Add avg to each item
+//     for(let i = 0; i < result[cValue].length; i++) {
+//       let item = result[cValue][i];
+//       item.avg = avg;
+      
+//       // Assign a distinct color to each item
+//       let hue = Math.floor((i / result[cValue].length) * 360);
+//       item.color = hslToHex(hue, 100, 50);
+//     }
+//   }
+
+//   // Sort the keys
+//   let keys = Object.keys(result);
+//   keys.sort((a, b) => {
+//     let minXa = Math.min(...result[a].map(item => item.x));
+//     let minXb = Math.min(...result[b].map(item => item.x));
+
+//     if (minXa !== minXb) return minXa - minXb;
+
+//     return result[a].length - result[b].length;
+//   });
+
+//   let sortedResult = keys.map(key => [key, result[key]]);
+
+//   // console.log("当前测试",sortedResult);
+//   return sortedResult;
+// }
+// const colors = [
+//   "#FF0000", "#00FF00", "#0000FF", "#FF00FF", "#00FFFF", "#000000",
+//   "#800000", "#008000", "#000080", "#800080", "#008080", "#808080",
+//   "#C00000", "#00C000", "#0000C0", "#C000C0", "#00C0C0", "#C0C0C0",
+//   "#400000", "#004000", "#000040", "#400040", "#004040", "#404040",
+//   "#200000", "#002000", "#000020", "#200020", "#002020", "#202020",
+//   "#600000", "#006000", "#000060", "#600060", "#006060", "#606060",
+//   "#A00000", "#00A000", "#0000A0", "#A000A0", "#00A0A0", "#A0A0A0",
+//   "#E00000", "#00E000", "#0000E0", "#E000E0", "#00E0E0", "#E0E0E0",
+//   "#100000", "#001000", "#000010", "#100010", "#001010", "#101010"
+// ];
+// export function classifyData(data) {
+//   let result = {};
+//   let colorIndex = 0;
+
+//   // Classify data
+//   for(let i = 0; i < data.length; i++) {
+//     let cValue = data[i].c;
+//     if(!result[cValue]) {
+//       result[cValue] = [];
+
+//       // Assign a distinct color to each cValue
+//       result[cValue].color = colors[colorIndex++ % colors.length];
+//     }
+//     result[cValue].push(data[i]);
+//   }
+
+//   // Calculate average y and add to each item
+//   for(let cValue in result) {
+//     // Calculate average
+//     let sum = 0;
+//     let count = result[cValue].length;
+//     for(let item of result[cValue]) {
+//       sum += item.y;
+//     }
+//     let avg = sum / count;
+
+//     // Add avg and distinct color to each item
+//     for(let item of result[cValue]) {
+//       item.avg = avg;
+//       item.color = result[cValue].color;
+//     }
+//   }
+
+//   // Sort the keys
+//   let keys = Object.keys(result);
+//   keys.sort((a, b) => {
+//     let minXa = Math.min(...result[a].map(item => item.x));
+//     let minXb = Math.min(...result[b].map(item => item.x));
+
+//     if (minXa !== minXb) return minXa - minXb;
+
+//     return result[a].length - result[b].length;
+//   });
+
+//   let sortedResult = keys.map(key => [key, result[key]]);
+
+//   // console.log("当前测试",sortedResult);
+//   return sortedResult;
+// }
 export function classifyData(data) {
   let result = {};
 
@@ -189,7 +309,7 @@ export function calculateAverage(data, differentiate) {
       averageData.push({
           x: key,
           y: value / countMap.get(key),
-          c: 0
+          c: -100
       });
   }
   averageData.sort((a, b) => a.x - b.x);

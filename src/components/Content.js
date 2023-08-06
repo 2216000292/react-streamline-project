@@ -11,8 +11,8 @@ function Content(props) {
   const [size, setSize] = useState(0);
   const [renderedChart, setRenderedChart] = useState(null);
   const { contentRef } = props;
-  // const inputData = props.inputData;
-  const [inputData, setInputData] = useState(JSON.parse(JSON.stringify(props.inputData)))
+  const inputData = props.inputData;
+  // const [inputData, setInputData] = useState(JSON.parse(JSON.stringify(props.inputData)))
   //The expected inputData should be an array composed of [index, regular data array , derivative data array, _ ].
 
 
@@ -28,7 +28,7 @@ function Content(props) {
     if (item) {
       item[3] = checked;
     }
-    setInputData(inputDataCopy);
+    props.setInputData(inputDataCopy);
   };
 
   useEffect(() => {
@@ -52,7 +52,7 @@ function Content(props) {
           {inputData.map((dataItem, index) => (
           <div className="chart-container" key={dataItem[0]}>
             <ScatterPlot inputData={dataItem[1]} xscale={xscale} yscale={yscale} size={{...size, width: size.width - 30}} extremeValues={extremeValues}/>
-            <CheckBox id={dataItem[0]} onCheck={handleCheckBoxChange} />
+            <CheckBox id={dataItem[0]} initialChecked={dataItem[3]} onCheck={handleCheckBoxChange} />
           </div>
           ))}
           </div>
@@ -61,6 +61,7 @@ function Content(props) {
       );
     }else{ //If the user checked the checkbox (render derivative data)
       extremeValues = findMinMax(inputData,true)  //Calculate the scale (the second parameter determines whether to use derivative data as input or not).
+      // console.log("新导数component被调用，当前data为",inputData);
       setRenderedChart(
         <>
           <ScatterPlot_overview inputData={calculateAverage(inputData,true)} xscale={xscale} yscale={yscale} size={size} extremeValues={extremeValues} showGradient={showGradient}></ScatterPlot_overview>
@@ -68,7 +69,7 @@ function Content(props) {
           {inputData.map((dataItem, index) => (
           <div className="chart-container" key={dataItem[0]}>
             <ScatterPlot inputData={dataItem[2]} xscale={xscale} yscale={yscale} size={{...size, width: size.width - 30}} extremeValues={extremeValues}/>
-            <CheckBox id={dataItem[0]}  onCheck={handleCheckBoxChange} />
+            <CheckBox id={dataItem[0]} initialChecked={dataItem[3]} onCheck={handleCheckBoxChange} />
           </div>
           ))}
           </div>
